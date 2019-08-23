@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v1/products")
 public class ProductController {
     @RequestMapping(method = RequestMethod.GET, value = "getProducts")
     public List<GenericEntity> getProducts() {
@@ -33,6 +33,5 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
     public void deleteProduct(Long productId) {
-
     }
 }
