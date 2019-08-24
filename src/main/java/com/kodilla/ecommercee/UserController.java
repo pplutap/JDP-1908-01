@@ -1,10 +1,7 @@
 package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.exceptions.UserNotFoundException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1/users")
@@ -20,7 +17,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getKey")
-    public String generateKey(@RequestParam Long id) throws UserNotFoundException {
+    public String generateKey(@RequestBody GenericEntity user) throws UserNotFoundException {
         return "";
     }
 }
