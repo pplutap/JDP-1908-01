@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("v1/user")
+@RequestMapping("v1/users")
 public class UserController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getUser")
@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getKey")
-    public String getKey() {
+    public String generateKey(@RequestParam Long id) throws UserNotFoundException {
         return "";
     }
 }
