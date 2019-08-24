@@ -17,7 +17,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getKey")
-    public String generateKey(@RequestBody GenericEntity user) throws UserNotFoundException {
+    public String generateKey(@RequestBody GenericEntity userDTO) throws UserNotFoundException {
         return "";
     }
 }
