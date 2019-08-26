@@ -24,7 +24,7 @@ public class OrderController {
         System.out.println("created order number "+orderDto.getId());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value= "showOrder", params = "id")
+    @RequestMapping(method = RequestMethod.GET, value= "showOrder")
     public GenericEntity showOrder(@RequestParam int orderId){
         return new GenericEntity("test order");
     }
@@ -34,7 +34,7 @@ public class OrderController {
         return new GenericEntity("updated order");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder", params = "id")
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")
     public void deleteOrder(@RequestParam int orderId){
         System.out.println("deleted order number "+orderId);
     }
