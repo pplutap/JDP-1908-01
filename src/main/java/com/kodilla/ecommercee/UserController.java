@@ -16,7 +16,7 @@ public class UserController {
     public void blockUser(@RequestParam Long id) throws UserNotFoundException {
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getKey")
+    @RequestMapping(method = RequestMethod.POST, value = "generateKey")
     public String generateKey(@RequestBody GenericEntity userDTO) throws UserNotFoundException {
         return "";
     }
