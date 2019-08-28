@@ -15,16 +15,16 @@ public class GroupController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createGroup")
-    public void createGroup(GenericEntity groupDto){
+    public void createGroup(@RequestBody GenericEntity groupDto){
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getGroupById")
-    public GenericEntity getGroupById (Long productGroupById){
+    public GenericEntity getGroupById (@RequestParam Long productGroupById){
         return new GenericEntity("Products Group 01");
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateGroupById")
-    public GenericEntity updateGroupById(GenericEntity groupDto){
+    public GenericEntity updateGroupById(@RequestBody GenericEntity groupDto){
         return new GenericEntity();
     }
 }
