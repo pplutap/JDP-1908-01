@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("v1/users")
 public class UserController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "getUser")
-    public GenericEntity getUser(@RequestParam Long id) throws UserNotFoundException {
-        return null;
+    @RequestMapping(method = RequestMethod.POST, value = "createUser")
+    public GenericEntity CreateUser(@RequestParam Long userId) throws UserNotFoundException {
+        return new GenericEntity("test Create User");
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "blockUser")
-    public void blockUser(@RequestParam Long id) throws UserNotFoundException {
+    public void blockUser(@RequestParam Long userId) throws UserNotFoundException {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "generateKey")
     public String generateKey(@RequestBody GenericEntity userDTO) throws UserNotFoundException {
-        return "";
+        return "test key";
     }
 }
