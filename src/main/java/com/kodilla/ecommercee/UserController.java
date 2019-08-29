@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createUser")
-    public GenericEntity CreateUser(@RequestParam Long userId) throws UserNotFoundException {
+    public GenericEntity createUser(@RequestParam Long userId) throws UserNotFoundException {
         return new GenericEntity("test Create User");
     }
 
