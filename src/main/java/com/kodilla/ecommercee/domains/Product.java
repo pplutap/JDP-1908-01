@@ -4,46 +4,48 @@ import com.kodilla.ecommercee.GenericEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "product")
+@Entity(name = "PRODUCTS")
 public class Product {
 
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "product_id", unique = true)
+    @Column(name = "PRODUCT_ID", unique = true)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "price")
+    @Column(name = "PRICE")
     private Long price;
 
     @ManyToOne
-    @JoinColumn(name = "groupId")
+    @JoinColumn(name = "GROUP_ID")
     private GenericEntity group;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "JOIN_PRODUCT_CART",
-            joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "card_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
-    private List<GenericEntity> carts;
+    private List<Cart> carts;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "JOIN_PRODUCT_ORDER",
-            joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "product_id")},
-            inverseJoinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
     )
-    private List<GenericEntity> orders;
+    private List<Order> orders;
 
 }
