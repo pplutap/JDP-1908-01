@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "PRODUCT")
+@Entity(name = "PRODUCTS")
 public class Product {
 
     @Id
