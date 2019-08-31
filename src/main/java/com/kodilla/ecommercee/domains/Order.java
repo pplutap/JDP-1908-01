@@ -22,8 +22,7 @@ public class Order {
     @Getter
     @ManyToOne
     @JoinColumn(name = "USER_ID")
-    private GenericEntity user;
-    //TODO change GenericEntity to User entity, when it's done
+    private User user;
 
     @Getter
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
