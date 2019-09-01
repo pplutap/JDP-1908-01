@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Getter
-@Table(name = "GROUP")
+@Table(name = "GROUPS")
 public class Group {
 
     @Id
