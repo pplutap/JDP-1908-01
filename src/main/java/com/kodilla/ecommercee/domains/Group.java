@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domains;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Getter
-@Table(name = "GROUPS")
+@Table(name = "GROUP")
 public class Group {
 
     @Id
