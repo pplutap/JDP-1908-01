@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "CARTS")

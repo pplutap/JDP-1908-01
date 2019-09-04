@@ -5,32 +5,62 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@Entity(name = "PRODUCTS")
+@Setter
+@Entity
+@Table(name = "PRODUCTS")
 public class Product {
+
+    private Long id;
+    private String name;
+    private String description;
+    private Long price;
+    private List<Order> orders = new ArrayList<>();
+    private List<Cart> carts = new ArrayList<>();
+    public Group group;
+
+    public Product() {
+    }
+
+    public Product(String name, String description, Long price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 
     @Id
     @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "PRODUCT_ID", unique = true)
-    private Long id;
+    public Long getId() {
+        return id;
+    }
 
+    @NotNull
     @Column(name = "NAME")
-    private String name;
+    public String getName() {
+        return name;
+    }
 
+    @NotNull
     @Column(name = "DESCRIPTION")
-    private String description;
+    public String getDescription() {
+        return description;
+    }
 
+    @NotNull
     @Column(name = "PRICE")
-    private Long price;
+    public Long getPrice() {
+        return price;
+    }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
-    private GenericEntity group;
+    public Group getGroup() {
+        return group;
+    }
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -38,14 +68,17 @@ public class Product {
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
-    private List<Cart> carts;
+    public List<Cart> getCarts() {
+        return carts;
+    }
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "JOIN_PRODUCT_ORDER",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
-    )
-    private List<Order> orders;
+            inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")})
+    public List<Order> getOrders() {
+        return orders;
+    }
 
 }
