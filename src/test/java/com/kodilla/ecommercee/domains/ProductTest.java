@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +21,21 @@ public class ProductTest {
     @Test
     public void testProductSave() {
         //Given
-        Product gazetaProduct = new Product("Dziennik", "gazeta", 10L);
-        Product graProduct = new Product("Baldur", "gra", 25L);
+        Product paperProduct = new Product("Dziennik", "gazeta", 10L);
+        Product gameProduct = new Product("Baldur", "gra", 25L);
 
-        List<Product> listaGazet = new ArrayList<>();
-        listaGazet.add(gazetaProduct);
+        List<Product> listPapers = new ArrayList<>();
+        listPapers.add(paperProduct);
 
-        List<Product> listaGier = new ArrayList<>();
-        listaGier.add(graProduct);
+        List<Product> listGames = new ArrayList<>();
+        listGames.add(gameProduct);
 
         //When
-        productRepository.save(gazetaProduct);
-        productRepository.save(graProduct);
+        productRepository.save(paperProduct);
+        productRepository.save(gameProduct);
 
-        long id = gazetaProduct.getId();
-        long id2 = graProduct.getId();
+        long id = paperProduct.getId();
+        long id2 = gameProduct.getId();
 
         //Then
         Assert.assertNotEquals(0, id);
@@ -47,21 +48,21 @@ public class ProductTest {
     @Test
     public void testReadProduct() {
         //Given
-        Product gazetaProduct = new Product("Dziennik", "gazeta", 10L);
-        Product graProduct = new Product("Baldur", "gra", 25L);
+        Product paperProduct = new Product("Dziennik", "gazeta", 10L);
+        Product gameProduct = new Product("Baldur", "gra", 25L);
 
-        List<Product> listaGazet = new ArrayList<>();
-        listaGazet.add(gazetaProduct);
+        List<Product> listPapers = new ArrayList<>();
+        listPapers.add(paperProduct);
 
-        List<Product> listaGier = new ArrayList<>();
-        listaGier.add(graProduct);
+        List<Product> listGames = new ArrayList<>();
+        listGames.add(gameProduct);
 
         //When
-        productRepository.save(gazetaProduct);
-        productRepository.save(graProduct);
+        productRepository.save(paperProduct);
+        productRepository.save(gameProduct);
 
-        String description = gazetaProduct.getDescription();
-        String description2 = graProduct.getDescription();
+        String description = paperProduct.getDescription();
+        String description2 = gameProduct.getDescription();
 
         //Then
         Assert.assertEquals("gazeta", description);
@@ -74,14 +75,14 @@ public class ProductTest {
     @Test
     public void testUpdateProduct() {
         //Given
-        Product gazetaProduct = new Product("Dziennik", "gazeta", 10L);
-        productRepository.save(gazetaProduct);
-        String oldDescription = gazetaProduct.getDescription();
+        Product paperProduct = new Product("Dziennik", "gazeta", 10L);
+        productRepository.save(paperProduct);
+        String oldDescription = paperProduct.getDescription();
 
         //When
-        gazetaProduct.setDescription("gazeta2");
-        productRepository.save(gazetaProduct);
-        String newDescription = gazetaProduct.getDescription();
+        paperProduct.setDescription("gazeta2");
+        productRepository.save(paperProduct);
+        String newDescription = paperProduct.getDescription();
 
         //Then
         Assert.assertEquals("gazeta", oldDescription);
@@ -94,18 +95,18 @@ public class ProductTest {
     @Test
     public void deleteProduct() {
         //Given
-        Product gazetaProduct = new Product("Dziennik", "gazeta", 10L);
-        Product gazetaProduct2 = new Product("Dziennik2", "gazeta2", 15L);
-        Product gazetaProduct3 = new Product("Dziennik3", "gazeta3", 20L);
-        productRepository.save(gazetaProduct);
-        productRepository.save(gazetaProduct2);
-        productRepository.save(gazetaProduct3);
+        Product paperProduct = new Product("Dziennik", "gazeta", 10L);
+        Product paperProduct2 = new Product("Dziennik2", "gazeta2", 15L);
+        Product paperProduct3 = new Product("Dziennik3", "gazeta3", 20L);
+        productRepository.save(paperProduct);
+        productRepository.save(paperProduct2);
+        productRepository.save(paperProduct3);
         long currentProducts = productRepository.count();
 
         System.out.println(currentProducts);
         //When
-        productRepository.delete(gazetaProduct3);
-        long id = gazetaProduct3.getId();
+        productRepository.delete(paperProduct3);
+        long id = paperProduct3.getId();
 
         long productsAfterDeletion = productRepository.count();
 

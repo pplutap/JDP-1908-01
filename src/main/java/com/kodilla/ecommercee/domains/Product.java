@@ -1,25 +1,15 @@
 package com.kodilla.ecommercee.domains;
 
-import com.kodilla.ecommercee.GenericEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
-@Setter
+@Getter
 @Entity
 @Table(name = "PRODUCTS")
 public class Product {
-
-    private Long id;
-    private String name;
-    private String description;
-    private Long price;
-    private List<Order> orders = new ArrayList<>();
-    private List<Cart> carts = new ArrayList<>();
-    public Group group;
 
     public Product() {
     }
@@ -34,33 +24,21 @@ public class Product {
     @NotNull
     @GeneratedValue
     @Column(name = "PRODUCT_ID", unique = true)
-    public Long getId() {
-        return id;
-    }
+    private Long id;
 
-    @NotNull
     @Column(name = "NAME")
-    public String getName() {
-        return name;
-    }
+    private String name;
 
-    @NotNull
+    @Setter
     @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
-    }
+    private String description;
 
-    @NotNull
     @Column(name = "PRICE")
-    public Long getPrice() {
-        return price;
-    }
+    private Long price;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
-    public Group getGroup() {
-        return group;
-    }
+    private Group group;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -68,17 +46,12 @@ public class Product {
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
-    public List<Cart> getCarts() {
-        return carts;
-    }
+    private List<Cart> carts;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "JOIN_PRODUCT_ORDER",
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")})
-    public List<Order> getOrders() {
-        return orders;
-    }
-
+    private List<Order> orders;
 }

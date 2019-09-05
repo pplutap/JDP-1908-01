@@ -1,52 +1,31 @@
 package com.kodilla.ecommercee.domains;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
+@Getter
 @Entity
 @Table(name = "GROUPS")
 public class Group {
 
-    private Long id;
-    private String groupName;
-
-    private List<Product> products = new ArrayList<>();
-
-    public Group (){
-    }
-
-    public Group(String groupName) {
-        this.groupName = groupName;
-    }
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     @Column(name = "GROUP_ID", unique = true)
-    public Long getId(){
-        return id;
-    }
+    private Long groupId;
 
-    @NotNull
     @Column(name = "GROUP_NAME")
-    public String getGroupName(){
-        return groupName;
-    }
+    private String groupName;
 
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    public List<Product> getProducts (){
-        return products;
-    }
+    private List<Product> products = new ArrayList<>();
+
 }
