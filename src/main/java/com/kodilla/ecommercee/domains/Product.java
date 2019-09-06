@@ -6,13 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "PRODUCTS")
 public class Product {
-
-    public Product() {
-    }
 
     public Product(String name, String description, Long price) {
         this.name = name;

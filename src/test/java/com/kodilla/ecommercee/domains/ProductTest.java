@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductTest {
@@ -19,16 +16,10 @@ public class ProductTest {
     ProductRepository productRepository;
 
     @Test
-    public void testProductSave() {
+    public void testSaveProduct() {
         //Given
         Product paperProduct = new Product("Dziennik", "gazeta", 10L);
         Product gameProduct = new Product("Baldur", "gra", 25L);
-
-        List<Product> listPapers = new ArrayList<>();
-        listPapers.add(paperProduct);
-
-        List<Product> listGames = new ArrayList<>();
-        listGames.add(gameProduct);
 
         //When
         productRepository.save(paperProduct);
@@ -51,25 +42,24 @@ public class ProductTest {
         Product paperProduct = new Product("Dziennik", "gazeta", 10L);
         Product gameProduct = new Product("Baldur", "gra", 25L);
 
-        List<Product> listPapers = new ArrayList<>();
-        listPapers.add(paperProduct);
-
-        List<Product> listGames = new ArrayList<>();
-        listGames.add(gameProduct);
-
-        //When
         productRepository.save(paperProduct);
         productRepository.save(gameProduct);
 
-        String description = paperProduct.getDescription();
-        String description2 = gameProduct.getDescription();
+        Long idPaper = paperProduct.getId();
+        Long idGames = gameProduct.getId();
+
+        //When
+        String description = productRepository.findById(idPaper).get().getDescription();
+        String description2 = productRepository.findById(idGames).get().getDescription();
 
         //Then
         Assert.assertEquals("gazeta", description);
         Assert.assertEquals("gra", description2);
 
         //CleanUp
-        productRepository.deleteAll();
+        //productRepository.deleteAll();
+        productRepository.deleteById(idPaper);
+        productRepository.deleteById(idGames);
     }
 
     @Test
@@ -77,46 +67,50 @@ public class ProductTest {
         //Given
         Product paperProduct = new Product("Dziennik", "gazeta", 10L);
         productRepository.save(paperProduct);
-        String oldDescription = paperProduct.getDescription();
+
+        Long idPaper = paperProduct.getId();
+        String oldDescription = productRepository.findById(idPaper).get().getDescription();
 
         //When
         paperProduct.setDescription("gazeta2");
         productRepository.save(paperProduct);
-        String newDescription = paperProduct.getDescription();
+        String newDescription = productRepository.findById(idPaper).get().getDescription();
 
         //Then
         Assert.assertEquals("gazeta", oldDescription);
         Assert.assertEquals("gazeta2", newDescription);
 
         //CleanUp
-        productRepository.deleteAll();
+        //productRepository.deleteAll();
+        productRepository.deleteById(idPaper);
     }
 
     @Test
-    public void deleteProduct() {
+    public void testDeleteProduct() {
         //Given
         Product paperProduct = new Product("Dziennik", "gazeta", 10L);
         Product paperProduct2 = new Product("Dziennik2", "gazeta2", 15L);
         Product paperProduct3 = new Product("Dziennik3", "gazeta3", 20L);
+
         productRepository.save(paperProduct);
         productRepository.save(paperProduct2);
         productRepository.save(paperProduct3);
-        long currentProducts = productRepository.count();
 
-        System.out.println(currentProducts);
+        long productsBeforeDeletion = productRepository.count();
+
+        Long idPaper = paperProduct.getId();
+        Long idPaper2 = paperProduct2.getId();
+
         //When
         productRepository.delete(paperProduct3);
-        long id = paperProduct3.getId();
-
         long productsAfterDeletion = productRepository.count();
 
-        System.out.println(productsAfterDeletion);
         //Then
-        Assert.assertEquals(3, currentProducts);
+        Assert.assertEquals(3, productsBeforeDeletion);
         Assert.assertEquals(2, productsAfterDeletion);
 
         //CleanUp
-        productRepository.deleteAll();
-
+        productRepository.deleteById(idPaper);
+        productRepository.deleteById(idPaper2);
     }
 }

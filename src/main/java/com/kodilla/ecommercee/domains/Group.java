@@ -1,16 +1,22 @@
 package com.kodilla.ecommercee.domains;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "GROUPS")
 public class Group {
+
+    public Group(String groupName) {
+        this.groupName = groupName;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
