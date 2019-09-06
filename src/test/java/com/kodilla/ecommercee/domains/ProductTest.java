@@ -25,15 +25,19 @@ public class ProductTest {
         productRepository.save(paperProduct);
         productRepository.save(gameProduct);
 
-        long id = paperProduct.getId();
-        long id2 = gameProduct.getId();
+        long idPaper = paperProduct.getId();
+        long idGames = gameProduct.getId();
+
+        long idPaperAssert = productRepository.findById(idPaper).get().getId();
+        long idGamesAssert = productRepository.findById(idGames).get().getId();
 
         //Then
-        Assert.assertNotEquals(0, id);
-        Assert.assertNotEquals(0, id2);
+        Assert.assertNotEquals(0, idPaperAssert);
+        Assert.assertNotEquals(0, idGamesAssert);
 
         //CleanUp
-        productRepository.deleteAll();
+        productRepository.deleteById(idPaperAssert);
+        productRepository.deleteById(idGamesAssert);
     }
 
     @Test
@@ -45,8 +49,8 @@ public class ProductTest {
         productRepository.save(paperProduct);
         productRepository.save(gameProduct);
 
-        Long idPaper = paperProduct.getId();
-        Long idGames = gameProduct.getId();
+        long idPaper = paperProduct.getId();
+        long idGames = gameProduct.getId();
 
         //When
         String description = productRepository.findById(idPaper).get().getDescription();
@@ -57,7 +61,6 @@ public class ProductTest {
         Assert.assertEquals("gra", description2);
 
         //CleanUp
-        //productRepository.deleteAll();
         productRepository.deleteById(idPaper);
         productRepository.deleteById(idGames);
     }
@@ -68,7 +71,7 @@ public class ProductTest {
         Product paperProduct = new Product("Dziennik", "gazeta", 10L);
         productRepository.save(paperProduct);
 
-        Long idPaper = paperProduct.getId();
+        long idPaper = paperProduct.getId();
         String oldDescription = productRepository.findById(idPaper).get().getDescription();
 
         //When
@@ -81,7 +84,6 @@ public class ProductTest {
         Assert.assertEquals("gazeta2", newDescription);
 
         //CleanUp
-        //productRepository.deleteAll();
         productRepository.deleteById(idPaper);
     }
 
@@ -98,8 +100,8 @@ public class ProductTest {
 
         long productsBeforeDeletion = productRepository.count();
 
-        Long idPaper = paperProduct.getId();
-        Long idPaper2 = paperProduct2.getId();
+        long idPaper = paperProduct.getId();
+        long idPaper2 = paperProduct2.getId();
 
         //When
         productRepository.delete(paperProduct3);
