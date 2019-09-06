@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.domains;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
@@ -11,10 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Entity(name = "USERS")
 public class User {
+    public User(String username, String status, Long userKey) {
+        this.username = username;
+        this.status = status;
+        this.userKey = userKey;
+    }
+
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +28,7 @@ public class User {
     private Long id;
 
     @Getter
+    @Setter
     @Column(name = "USERNAME")
     private String username;
 
