@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domains;
 
-import com.kodilla.ecommercee.GenericEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,9 +21,26 @@ public class Cart {
     private Long cartId;
 
     @Getter
+    @Column(name = "NAME")
+    private String name;
+
+    @Getter
+    @Column(name = "DESCRIPTION")
+    private String description;
+
+    @Getter
+    @Column(name = "PRICE")
+    private long price;
+
+    @Getter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @Getter
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Column(name = "GROUP_ID")
+    private Group groupId;
 
     @Getter
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
