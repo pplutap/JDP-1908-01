@@ -15,10 +15,10 @@ import java.util.List;
 @Getter
 @Entity(name = "USERS")
 public class User {
+
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID", unique = true)
     private Long id;
 
     @Getter
