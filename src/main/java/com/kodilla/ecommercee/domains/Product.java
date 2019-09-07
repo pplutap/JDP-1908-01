@@ -1,20 +1,25 @@
 package com.kodilla.ecommercee.domains;
 
-import com.kodilla.ecommercee.GenericEntity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
 @Entity(name = "PRODUCTS")
 public class Product {
 
+    public Product(String name, String description, Long price, Group group) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.group = group;
+    }
+
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PRODUCT_ID", unique = true)
     private Long id;
@@ -28,9 +33,9 @@ public class Product {
     @Column(name = "PRICE")
     private Long price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
-    private GenericEntity group;
+    private Group group;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -38,7 +43,7 @@ public class Product {
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
-    private List<Cart> carts;
+    private List<Cart> carts = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -46,6 +51,6 @@ public class Product {
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
     )
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
 }

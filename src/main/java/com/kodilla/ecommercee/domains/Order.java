@@ -1,11 +1,9 @@
 package com.kodilla.ecommercee.domains;
 
-import com.kodilla.ecommercee.GenericEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @NoArgsConstructor
@@ -14,7 +12,6 @@ import java.util.List;
 public class Order {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ORDER_ID", unique = true)
     private Long orderId;
