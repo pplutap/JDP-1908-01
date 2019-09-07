@@ -19,7 +19,7 @@ public class GroupEntityTestSuite {
     GroupRepository repository;
 
     @Test
-    public void groupSaveTest(){
+    public void groupSaveTest() {
         //Given
         Group group = new Group("test group");
         Product productOne = new Product("test product 1", "test description 1", 1L, group);
@@ -59,7 +59,6 @@ public class GroupEntityTestSuite {
         Group resultGroup = repository.findById(id).orElseThrow(GroupNotFoundException::new);
 
         Assert.assertEquals("test group", resultGroup.getGroupName());
-        Assert.assertEquals(3, resultGroup.getProducts().size());
 
         //CleanUp
         repository.deleteById(id);
@@ -93,7 +92,8 @@ public class GroupEntityTestSuite {
         repository.deleteById(id);
     }
 
-    public void groupDeleteTest() throws GroupNotFoundException {
+    @Test
+    public void groupDeleteTest() {
         //Given
         Group group = new Group("test group");
         Product productOne = new Product("test product 1", "test description 1", 1L, group);
