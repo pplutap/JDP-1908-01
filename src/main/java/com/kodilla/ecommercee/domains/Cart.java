@@ -24,7 +24,7 @@ public class Cart {
     @Getter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
-    private GenericEntity user;
+    private User user;
 
     @Getter
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
