@@ -21,7 +21,6 @@ public class Product {
     }
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PRODUCT_ID", unique = true)
     private Long id;
@@ -35,7 +34,7 @@ public class Product {
     @Column(name = "PRICE")
     private Long price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
