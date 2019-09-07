@@ -29,7 +29,7 @@ public class Group {
     @Column(name = "GROUP_NAME")
     private String groupName;
 
-    @Getter
+    @Setter
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "group",
