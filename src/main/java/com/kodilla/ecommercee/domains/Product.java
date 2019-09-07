@@ -35,7 +35,7 @@ public class Product {
     @Column(name = "PRICE")
     private Long price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
