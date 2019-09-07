@@ -21,7 +21,6 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createProduct")
     public void createProduct(@RequestBody GenericEntity productDto) {
-
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
