@@ -19,9 +19,25 @@ public class Cart {
     private Long cartId;
 
     @Getter
+    @Column(name = "NAME")
+    private String name;
+
+    @Getter
+    @Column(name = "DESCRIPTION")
+    private String description;
+
+    @Getter
+    @Column(name = "PRICE")
+    private long price;
+
+    @Getter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "GROUP_ID")
+    private Group group;
 
     @Getter
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")

@@ -34,4 +34,12 @@ public class Group {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
+
+    @Getter
+    @OneToMany(
+            targetEntity = Cart.class,
+            mappedBy = "group",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Cart> carts = new ArrayList<>();
 }
