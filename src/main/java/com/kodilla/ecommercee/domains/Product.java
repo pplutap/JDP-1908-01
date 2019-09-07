@@ -21,7 +21,6 @@ public class Product {
     }
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PRODUCT_ID", unique = true)
     private Long id;
