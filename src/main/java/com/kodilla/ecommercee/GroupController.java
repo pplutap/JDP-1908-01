@@ -39,7 +39,6 @@ public class GroupController {
     public GroupDto updateGroupById(@RequestBody GroupDto groupDto) throws GroupNotFoundException {
         Group updateGroup = groupRepository.findById(groupDto.getGroupId()).orElseThrow(GroupNotFoundException::new);
         updateGroup.setGroupName(groupDto.getGroupName());
-        updateGroup.setProducts(groupDto.getProducts());
         return groupMapper.mapToGroupDto(groupRepository.save(updateGroup));
     }
 }
