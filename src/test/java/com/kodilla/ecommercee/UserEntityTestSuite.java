@@ -24,8 +24,7 @@ public class UserEntityTestSuite {
     @Test
     public void userSaveTest() {
         //Given
-        List<Order> orders = new ArrayList<>();
-        User user = new User("Mark", true, orders);
+        User user = new User("Mark", 1);
 
         //When
         repository.save(user);
@@ -41,8 +40,7 @@ public class UserEntityTestSuite {
     @Test
     public void userReadTest() throws UserNotFoundException {
         //Given
-        List<Order> orders = new ArrayList<>();
-        User user = new User("Mark", true, orders);
+        User user = new User("Mark", 1);
 
         //When
         repository.save(user);
@@ -52,7 +50,7 @@ public class UserEntityTestSuite {
         User result = repository.findById(id).orElseThrow(UserNotFoundException::new);
 
         Assert.assertEquals("Mark", result.getUsername());
-        Assert.assertEquals(true, result.isStatus());
+        Assert.assertEquals(1, result.getStatus());
 
         //CleanUp
         repository.deleteById(id);
@@ -61,8 +59,7 @@ public class UserEntityTestSuite {
     @Test
     public void userUpdateTest() throws UserNotFoundException {
         //Given
-        List<Order> orders = new ArrayList<>();
-        User user = new User("Mark", true, orders);
+        User user = new User("Mark", 1);
 
         //When
         repository.save(user);
@@ -84,9 +81,7 @@ public class UserEntityTestSuite {
     @Test
     public void userDeleteTest() {
         //Given
-        //Given
-        List<Order> orders = new ArrayList<>();
-        User user = new User("Mark", true, orders);
+        User user = new User("Mark", 1);
 
         //When
         repository.save(user);

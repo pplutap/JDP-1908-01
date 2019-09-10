@@ -12,7 +12,7 @@ import java.util.List;
 public class UserDto {
     private Long id;
     private String username;
-    private boolean status;
+    private int status;
     private Long userKey;
     private List<Order> orders;
 }

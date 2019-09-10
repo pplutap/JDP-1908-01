@@ -2,18 +2,14 @@ package com.kodilla.ecommercee.repositories;
 
 import com.kodilla.ecommercee.domains.User;
 import org.springframework.data.repository.CrudRepository;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Repository
+@Transactional
 public interface UserRepository extends CrudRepository<User, Long> {
-    @Override
-    User save (User user);
 
-    @Override
-    Optional<User> findById (Long id);
+    Optional<User> findByUsername (String username);
 
-    Optional<User> findUserByUsername (String username);
-
-    @Override
-    void deleteById (Long id);
 }

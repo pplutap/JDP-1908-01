@@ -13,10 +13,9 @@ import java.util.List;
 @Entity(name = "USERS")
 public class User {
 
-    public User(String username, boolean status, List<Order> orders) {
+    public User(String username, int status) {
         this.username = username;
         this.status = status;
-        this.orders= orders;
     }
 
     @Id
@@ -32,11 +31,11 @@ public class User {
     @Getter
     @Setter
     @Column(name = "STATUS")
-    private boolean status = true;
+    private int status = 1;
 
     @Getter
     @Setter
-    @Column(name = "USER_KEY", unique = true)
+    @Column(name = "USER_KEY")
     private Long userKey;
 
     @Getter

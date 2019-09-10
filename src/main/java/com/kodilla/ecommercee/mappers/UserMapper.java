@@ -9,8 +9,7 @@ public class UserMapper {
     public User mapToUser(final UserDto userDto){
         return new User (
                 userDto.getUsername(),
-                userDto.isStatus(),
-                userDto.getOrders()
+                userDto.getStatus()
         );
     }
 
@@ -18,7 +17,7 @@ public class UserMapper {
         return new UserDto(
                 user.getId(),
                 user.getUsername(),
-                user.isStatus(),
+                user.getStatus(),
                 user.getUserKey(),
                 user.getOrders()
         );

@@ -19,16 +19,16 @@ public class UserService {
 
     public User blockUserById(final Long userId) throws UserNotFoundException {
         User blockUser = repository.findById(userId).orElseThrow(UserNotFoundException::new);
-        blockUser.setStatus(false);
+        blockUser.setStatus(0);
         return repository.save(blockUser);
     }
 
     public User generateKey(final String username) throws UserNotFoundException {
         Random rand = new Random();
-        long key = rand.nextInt(90000) + 10000;
+        long generateRandomUserKey = rand.nextInt(90000) + 10000;
 
-        User generateNumber = repository.findUserByUsername(username).orElseThrow(UserNotFoundException::new);
-        generateNumber.setUserKey(key);
-        return repository.save(generateNumber);
+        User assignRandomUserKey = repository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+        assignRandomUserKey.setUserKey(generateRandomUserKey);
+        return repository.save(assignRandomUserKey);
     }
 }
