@@ -25,10 +25,10 @@ public class UserService {
 
     public User generateKey(final String username) throws UserNotFoundException {
         Random rand = new Random();
-        long generateRandomUserKey = rand.nextInt(90000) + 10000;
+        long randomUserKey = rand.nextInt(90000) + 10000;
 
-        User assignRandomUserKey = repository.findByUsername(username).orElseThrow(UserNotFoundException::new);
-        assignRandomUserKey.setUserKey(generateRandomUserKey);
-        return repository.save(assignRandomUserKey);
+        User user = repository.findByUsername(username).orElseThrow(UserNotFoundException::new);
+        user.setUserKey(randomUserKey);
+        return repository.save(user);
     }
 }
