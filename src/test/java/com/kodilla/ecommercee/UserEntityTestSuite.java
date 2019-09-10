@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee;
 
+import com.kodilla.ecommercee.domains.Order;
 import com.kodilla.ecommercee.domains.User;
 import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.repositories.UserRepository;
@@ -9,6 +10,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,7 +24,8 @@ public class UserEntityTestSuite {
     @Test
     public void userSaveTest() {
         //Given
-        User user = new User("Mark", "active", 123456L);
+        List<Order> orders = new ArrayList<>();
+        User user = new User("Mark", true, orders);
 
         //When
         repository.save(user);
@@ -36,7 +41,8 @@ public class UserEntityTestSuite {
     @Test
     public void userReadTest() throws UserNotFoundException {
         //Given
-        User user = new User("Mark", "active", 123456L);
+        List<Order> orders = new ArrayList<>();
+        User user = new User("Mark", true, orders);
 
         //When
         repository.save(user);
@@ -46,7 +52,7 @@ public class UserEntityTestSuite {
         User result = repository.findById(id).orElseThrow(UserNotFoundException::new);
 
         Assert.assertEquals("Mark", result.getUsername());
-        Assert.assertEquals("active", result.getStatus());
+        Assert.assertEquals(true, result.isStatus());
 
         //CleanUp
         repository.deleteById(id);
@@ -55,7 +61,8 @@ public class UserEntityTestSuite {
     @Test
     public void userUpdateTest() throws UserNotFoundException {
         //Given
-        User user = new User("Mark", "active", 123456L);
+        List<Order> orders = new ArrayList<>();
+        User user = new User("Mark", true, orders);
 
         //When
         repository.save(user);
@@ -77,7 +84,9 @@ public class UserEntityTestSuite {
     @Test
     public void userDeleteTest() {
         //Given
-        User user = new User("Mark", "active", 123456L);
+        //Given
+        List<Order> orders = new ArrayList<>();
+        User user = new User("Mark", true, orders);
 
         //When
         repository.save(user);

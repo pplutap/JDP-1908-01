@@ -13,15 +13,15 @@ import java.util.List;
 @Entity(name = "USERS")
 public class User {
 
-    public User(String username, String status, Long userKey) {
+    public User(String username, boolean status, List<Order> orders) {
         this.username = username;
         this.status = status;
-        this.userKey = userKey;
+        this.orders= orders;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID", unique = true)
     private Long id;
 
     @Getter
@@ -32,10 +32,11 @@ public class User {
     @Getter
     @Setter
     @Column(name = "STATUS")
-    private String status;
+    private boolean status = true;
 
     @Getter
-    @Column(name = "USER_KEY")
+    @Setter
+    @Column(name = "USER_KEY", unique = true)
     private Long userKey;
 
     @Getter
@@ -46,4 +47,5 @@ public class User {
             fetch = FetchType.EAGER
     )
     private List<Order> orders = new ArrayList<>();
+
 }
