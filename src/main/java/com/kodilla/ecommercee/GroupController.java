@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.domains.Group;
 import com.kodilla.ecommercee.domains.GroupDto;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
 import com.kodilla.ecommercee.mappers.GroupMapper;
-import com.kodilla.ecommercee.repositories.GroupRepository;
 import com.kodilla.ecommercee.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
