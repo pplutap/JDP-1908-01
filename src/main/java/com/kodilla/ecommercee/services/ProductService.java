@@ -34,7 +34,7 @@ public class ProductService {
         updatedProduct.setPrice(product.getPrice());
         updatedProduct.setGroup(product.getGroup());
 
-        return repository.save(product);
+        return repository.save(updatedProduct);
     }
 
     public void deleteProductById(Long productId) throws ProductNotFoundException {
