@@ -47,8 +47,6 @@ public class OrderEntityTestSuite {
 
         //Then
         Assert.assertEquals("Thomas",result.getUser().getUsername());
-        Assert.assertNotEquals(null,result);
-        Assert.assertNotEquals(0,result.getId(),0.001);
 
         //CleanUp
         repository.deleteById(id);
