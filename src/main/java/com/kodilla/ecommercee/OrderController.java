@@ -2,8 +2,6 @@ package com.kodilla.ecommercee;
 
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.ServerEndpoint;
-import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.List;
 
