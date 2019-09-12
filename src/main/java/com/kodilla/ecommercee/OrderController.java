@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.ServerEndpoint;
 import java.lang.ref.ReferenceQueue;
@@ -14,27 +11,27 @@ import java.util.List;
 @RequestMapping("/v1/orders")
 public class OrderController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "getOrders")
+    @GetMapping(value = "getOrders")
     public List<GenericEntity> getOrders(){
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createOrder")
+    @PostMapping(value = "createOrder")
     public void createOrder(GenericEntity orderDto){
         System.out.println("created order number "+orderDto.getId());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value= "showOrder")
+    @GetMapping(value= "showOrder")
     public GenericEntity showOrder(@RequestParam int orderId){
         return new GenericEntity("test order");
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateOrder")
+    @PutMapping( value = "updateOrder")
     public GenericEntity updateOrder(GenericEntity orderDto){
         return new GenericEntity("updated order");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")
+    @DeleteMapping(value = "deleteOrder")
     public void deleteOrder(@RequestParam int orderId){
         System.out.println("deleted order number "+orderId);
     }
