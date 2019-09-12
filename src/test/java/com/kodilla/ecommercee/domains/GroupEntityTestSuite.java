@@ -1,8 +1,6 @@
 package com.kodilla.ecommercee.domains;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.kodilla.ecommercee.exceptions.GroupNotFoundException;
-import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.repositories.GroupRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,12 +20,6 @@ public class GroupEntityTestSuite {
     public void groupSaveTest() {
         //Given
         Group group = new Group("test group");
-        Product productOne = new Product("test product 1", "test description 1", 1L, group);
-        Product productTwo = new Product("test product 2", "test description 2", 2L, group);
-        Product productThree = new Product("test product 3", "test description 3", 3L, group);
-        group.getProducts().add(productOne);
-        group.getProducts().add(productTwo);
-        group.getProducts().add(productThree);
 
         //When
         repository.save(group);
@@ -44,12 +36,6 @@ public class GroupEntityTestSuite {
     public void groupReadTest() throws GroupNotFoundException {
         //Given
         Group group = new Group("test group");
-        Product productOne = new Product("test product 1", "test description 1", 1L, group);
-        Product productTwo = new Product("test product 2", "test description 2", 2L, group);
-        Product productThree = new Product("test product 3", "test description 3", 3L, group);
-        group.getProducts().add(productOne);
-        group.getProducts().add(productTwo);
-        group.getProducts().add(productThree);
 
         //When
         repository.save(group);
@@ -68,12 +54,6 @@ public class GroupEntityTestSuite {
     public void groupUpdateTest() throws GroupNotFoundException {
         //Given
         Group group = new Group("test group");
-        Product productOne = new Product("test product 1", "test description 1", 1L, group);
-        Product productTwo = new Product("test product 2", "test description 2", 2L, group);
-        Product productThree = new Product("test product 3", "test description 3", 3L, group);
-        group.getProducts().add(productOne);
-        group.getProducts().add(productTwo);
-        group.getProducts().add(productThree);
 
         //When
         repository.save(group);
@@ -96,12 +76,6 @@ public class GroupEntityTestSuite {
     public void groupDeleteTest() {
         //Given
         Group group = new Group("test group");
-        Product productOne = new Product("test product 1", "test description 1", 1L, group);
-        Product productTwo = new Product("test product 2", "test description 2", 2L, group);
-        Product productThree = new Product("test product 3", "test description 3", 3L, group);
-        group.getProducts().add(productOne);
-        group.getProducts().add(productTwo);
-        group.getProducts().add(productThree);
 
         //When
         repository.save(group);
