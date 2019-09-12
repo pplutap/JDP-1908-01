@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.services;
 
 import com.kodilla.ecommercee.domains.Order;
+import com.kodilla.ecommercee.exceptions.OrderNotFoundException;
 import com.kodilla.ecommercee.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class OrderService {
     }
 
     public Order getOrderById(final long id) {
-        return repository.findById(id).orElse(null);
+        return repository.findById(id).orElseThrow(OrderNotFoundException::new);
     }
 
     public Order saveOrder(final Order order) {
@@ -25,6 +26,7 @@ public class OrderService {
     }
 
     public void deleteOrder(final long id) {
-        repository.deleteById(id);
+        Order order = repository.findById(id).orElseThrow(OrderNotFoundException::new);
+        repository.delete(order);
     }
 }
