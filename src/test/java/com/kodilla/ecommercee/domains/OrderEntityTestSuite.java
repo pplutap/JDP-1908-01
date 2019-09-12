@@ -46,6 +46,7 @@ public class OrderEntityTestSuite {
         Order result = repository.findById(id).orElseThrow(OrderNotFoundException::new);
 
         //Then
+        Assert.assertEquals("Thomas",result.getUser().getUsername());
         Assert.assertNotEquals(null,result);
         Assert.assertNotEquals(0,result.getId(),0.001);
 
@@ -67,8 +68,11 @@ public class OrderEntityTestSuite {
         Order updateOrder = repository.findById(id).orElseThrow(OrderNotFoundException::new);
         updateOrder.setUser(user2);
 
+        repository.save(updateOrder);
+        Order result = repository.findById(id).orElseThrow(OrderNotFoundException::new);
+
         //Then
-        Assert.assertEquals(user2,updateOrder.getUser());
+        Assert.assertEquals("Mark",result.getUser().getUsername());
 
         //CleanUp
         repository.deleteById(id);
