@@ -7,9 +7,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @NoArgsConstructor
-@Data
-@Entity(name = "PRODUCTS")
+@Entity
+@Table(name = "PRODUCTS")
 public class Product {
 
     public Product(String name, String description, Long price, Group group) {
@@ -24,15 +25,19 @@ public class Product {
     @Column(name = "PRODUCT_ID", unique = true)
     private Long id;
 
+    @Setter
     @Column(name = "NAME")
     private String name;
 
+    @Setter
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Setter
     @Column(name = "PRICE")
     private Long price;
 
+    @Setter
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "GROUP_ID")
     private Group group;
