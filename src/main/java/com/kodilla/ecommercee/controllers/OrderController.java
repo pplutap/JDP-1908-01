@@ -1,44 +1,36 @@
-package com.kodilla.ecommercee.controllers;
+package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domains.OrderDto;
-import com.kodilla.ecommercee.mappers.OrderMapper;
-import com.kodilla.ecommercee.services.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/orders")
 public class OrderController {
 
-    @Autowired
-    private OrderService service;
-    @Autowired
-    private OrderMapper mapper;
-
-    @GetMapping(path = "getOrders")
-    public List<OrderDto> getOrders() {
-        return mapper.mapToOrderDtoList(service.getOrders());
+    @GetMapping(value = "getOrders")
+    public List<GenericEntity> getOrders(){
+        return new ArrayList<>();
     }
 
-    @PostMapping(path = "createOrder")
-    public void createOrder(@RequestBody OrderDto orderDto) {
-        service.saveOrder(mapper.mapToOrder(orderDto));
+    @PostMapping(value = "createOrder")
+    public void createOrder(GenericEntity orderDto){
+        System.out.println("created order number "+orderDto.getId());
     }
 
-    @GetMapping(path = "showOrder")
-    public OrderDto showOrder(@RequestParam long orderId) {
-        return mapper.mapToOrderDto(service.getOrderById(orderId));
+    @GetMapping(value= "showOrder")
+    public GenericEntity showOrder(@RequestParam int orderId){
+        return new GenericEntity("test order");
     }
 
-    @PutMapping(path = "updateOrder")
-    public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
-        return mapper.mapToOrderDto(service.saveOrder(mapper.mapToOrder(orderDto)));
+    @PutMapping( value = "updateOrder")
+    public GenericEntity updateOrder(GenericEntity orderDto){
+        return new GenericEntity("updated order");
     }
 
-    @DeleteMapping(path = "deleteOrder")
-    public void deleteOrder(@RequestParam long orderId) {
-        service.deleteOrder(orderId);
+    @DeleteMapping(value = "deleteOrder")
+    public void deleteOrder(@RequestParam int orderId){
+        System.out.println("deleted order number "+orderId);
     }
 }
