@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.domains;
 
 import com.kodilla.ecommercee.domains.Order;
 import com.kodilla.ecommercee.domains.User;

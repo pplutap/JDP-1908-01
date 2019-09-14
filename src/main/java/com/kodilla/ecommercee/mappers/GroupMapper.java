@@ -11,10 +11,7 @@ import java.util.stream.Collectors;
 public class GroupMapper {
 
     public Group mapToGroup(final GroupDto groupDto) {
-        Group group = new Group(
-                groupDto.getGroupName()
-        );
-        return group;
+        return new Group(groupDto.getGroupName());
     }
 
     public GroupDto mapToGroupDto(final Group group) {
