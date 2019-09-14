@@ -17,27 +17,27 @@ public class OrderController {
     @Autowired
     private OrderMapper mapper;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getOrders")
+    @GetMapping(path = "getOrders")
     public List<OrderDto> getOrders() {
         return mapper.mapToOrderDtoList(service.getOrders());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createOrder")
+    @PostMapping(path = "createOrder")
     public void createOrder(@RequestBody OrderDto orderDto) {
         service.saveOrder(mapper.mapToOrder(orderDto));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "showOrder")
+    @GetMapping(path = "showOrder")
     public OrderDto showOrder(@RequestParam long orderId) {
         return mapper.mapToOrderDto(service.getOrderById(orderId));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateOrder")
+    @PutMapping(path = "updateOrder")
     public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
         return mapper.mapToOrderDto(service.saveOrder(mapper.mapToOrder(orderDto)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")
+    @DeleteMapping(path = "deleteOrder")
     public void deleteOrder(@RequestParam long orderId) {
         service.deleteOrder(orderId);
     }
