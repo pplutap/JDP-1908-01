@@ -5,8 +5,8 @@ import com.kodilla.ecommercee.exceptions.UserNotFoundException;
 import com.kodilla.ecommercee.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Random;
 
-import java.security.SecureRandom;
 
 @Service
 public class UserService {
@@ -24,8 +24,8 @@ public class UserService {
     }
 
     public User generateKey(final String username) throws UserNotFoundException {
-        SecureRandom rand = new SecureRandom();
-        long randomUserKey = (long)rand.nextInt(90000) + (long)10000;
+        Random rand = new Random();
+        long randomUserKey = rand.nextInt(90000) + 10000;
 
         User user = repository.findByUsername(username).orElseThrow(UserNotFoundException::new);
         user.setUserKey(randomUserKey);

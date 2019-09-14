@@ -17,17 +17,17 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    @PostMapping(value = "createUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
         userService.createUser(userMapper.mapToUser(userDto));
     }
 
-    @PutMapping(value = "blockUser")
+    @RequestMapping(method = RequestMethod.PUT, value = "blockUser")
     public void blockUserById(@RequestParam Long userId) throws UserNotFoundException {
         userMapper.mapToUserDto(userService.blockUserById(userId));
     }
 
-    @PostMapping(value = "generateKey")
+    @RequestMapping(method = RequestMethod.POST, value = "generateKey")
     public void generateKey(@RequestBody String username) throws UserNotFoundException {
         userMapper.mapToUserDto(userService.generateKey(username));
     }

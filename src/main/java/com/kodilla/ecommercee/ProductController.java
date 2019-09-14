@@ -20,28 +20,28 @@ public class ProductController {
     @Autowired
     ProductMapper mapper;
 
-    @GetMapping(value = "getProducts")
+    @RequestMapping(method = RequestMethod.GET, value = "getProducts")
     public List<ProductDto> getProducts() {
         return mapper.mapToProductDtoList(service.getAllProducts());
     }
 
-    @GetMapping(value = "getProduct")
+    @RequestMapping(method = RequestMethod.GET, value = "getProduct")
     public ProductDto getProduct(@RequestParam Long productId) throws ProductNotFoundException {
         return mapper.mapToProductDto(service.findProductById(productId));
     }
 
-    @PostMapping(value = "createProduct")
+    @RequestMapping(method = RequestMethod.POST, value = "createProduct")
     public void createProduct(@RequestBody ProductDto productDto) {
         service.saveProduct(mapper.mapToProduct(productDto));
     }
 
-    @PutMapping(value = "updateProduct")
+    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
     public ProductDto updateProduct(@RequestBody ProductDto productDto) throws ProductNotFoundException {
         Product updatedProduct = service.updateProduct(mapper.mapToProduct(productDto));
         return mapper.mapToProductDto(updatedProduct);
     }
 
-    @DeleteMapping(value = "deleteProduct")
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
     public void deleteProduct(@RequestParam Long productId) throws ProductNotFoundException {
         service.deleteProductById(productId);
     }
