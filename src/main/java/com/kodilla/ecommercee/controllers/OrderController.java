@@ -27,8 +27,8 @@ public class OrderController {
 
     @PostMapping(path = "createOrder")
     public void createOrder(@RequestBody OrderDto orderDto) {
-        //service.saveOrder(mapper.mapToOrder(orderDto));
-        emailOrderService.createdOrder(mapper.mapToOrder(orderDto));
+        service.saveOrder(mapper.mapToOrder(orderDto));
+        emailOrderService.sendEmail();
     }
 
     @GetMapping(path = "showOrder")
