@@ -44,8 +44,7 @@ public class CartService {
 
     public void createOrderByCart(final Long id) throws CartNotFoundException {
         Cart cartForCreateOrder = repository.findById(id).orElseThrow(CartNotFoundException::new);
-        User user = cartForCreateOrder.getUser();
-        Order order = new Order(user);
+        Order order = new Order(cartForCreateOrder.getUser());
 
         order.setProducts(cartForCreateOrder.getProducts());
         orderRepository.save(order);
