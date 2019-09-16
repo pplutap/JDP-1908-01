@@ -25,9 +25,6 @@ public class CartController {
     @Autowired
     private ProductMapper productMapper;
 
-    @Autowired
-    private OrderMapper orderMapper;
-
     @GetMapping(value = "getCart")
     public CartDto getCartById(@RequestParam Long cartId) throws CartNotFoundException {
         return cartMapper.mapToCartDto(service.getCart(cartId));
@@ -39,13 +36,13 @@ public class CartController {
     }
 
     @PostMapping(value = "addProducts")
-    public void addProductsToCart(@RequestBody List<ProductDto> productsDto, @RequestParam Long cartId) {
+    public void addProductsToCart(@RequestBody List<ProductDto> productsDto, @RequestParam Long cartId) throws CartNotFoundException {
         service.addProductsToCart(productMapper.mapToProductList(productsDto), cartId);
     }
 
     @PostMapping(value = "createOrder")
-    public void createOrder(@RequestBody OrderDto orderDto, @RequestParam Long cartId) {
-        service.createOrderByCart(orderMapper.mapToOrder(orderDto), cartId);
+    public void createOrder(@RequestParam Long cartId) throws CartNotFoundException {
+        service.createOrderByCart(cartId);
     }
 
     @DeleteMapping(value = "deleteCart")

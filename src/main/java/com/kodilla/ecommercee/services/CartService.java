@@ -3,8 +3,10 @@ package com.kodilla.ecommercee.services;
 import com.kodilla.ecommercee.domains.Cart;
 import com.kodilla.ecommercee.domains.Order;
 import com.kodilla.ecommercee.domains.Product;
+import com.kodilla.ecommercee.domains.User;
 import com.kodilla.ecommercee.exceptions.CartNotFoundException;
 import com.kodilla.ecommercee.repositories.CartRepository;
+import com.kodilla.ecommercee.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class CartService {
     private CartRepository repository;
 
     @Autowired
-    private OrderService orderService;
+    private OrderRepository orderRepository;
 
     public Cart getCart(final Long id) throws CartNotFoundException {
         return repository.findById(id).orElseThrow(CartNotFoundException::new);
@@ -34,14 +36,19 @@ public class CartService {
 
     public void addProductsToCart(final List<Product> products, final Long id) throws CartNotFoundException {
         Cart updateCart = repository.findById(id).orElseThrow(CartNotFoundException::new);
-        updateCart.setProducts(products);
+        for (Product product : products) {
+            updateCart.getProducts().add(product);
+        }
         repository.save(updateCart);
     }
 
-    public void createOrderByCart(final Order order, final Long id) {
+    public void createOrderByCart(final Long id) throws CartNotFoundException {
         Cart cartForCreateOrder = repository.findById(id).orElseThrow(CartNotFoundException::new);
+        User user = cartForCreateOrder.getUser();
+        Order order = new Order(user);
+
         order.setProducts(cartForCreateOrder.getProducts());
-        orderService.saveOrder(order);
+        orderRepository.save(order);
     }
 
 }
