@@ -3,7 +3,6 @@ package com.kodilla.ecommercee.domains;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,6 +24,5 @@ public class Cart {
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
-    @Setter
     private List<Product> products;
 }
