@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.controllers;
 
 import com.kodilla.ecommercee.domains.OrderDto;
 import com.kodilla.ecommercee.mappers.OrderMapper;
+import com.kodilla.ecommercee.services.EmailOrderService;
 import com.kodilla.ecommercee.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ public class OrderController {
     private OrderService service;
     @Autowired
     private OrderMapper mapper;
+    @Autowired
+    private EmailOrderService emailOrderService;
 
     @GetMapping(path = "getOrders")
     public List<OrderDto> getOrders() {
@@ -25,6 +28,7 @@ public class OrderController {
     @PostMapping(path = "createOrder")
     public void createOrder(@RequestBody OrderDto orderDto) {
         service.saveOrder(mapper.mapToOrder(orderDto));
+        emailOrderService.sendEmail();
     }
 
     @GetMapping(path = "showOrder")
