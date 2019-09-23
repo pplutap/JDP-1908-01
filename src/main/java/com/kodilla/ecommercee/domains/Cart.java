@@ -18,6 +18,7 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     @Column(name = "CART_ID", unique = true)
     private Long cartId;
 

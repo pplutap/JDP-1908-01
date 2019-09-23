@@ -34,6 +34,7 @@ public class CartEntityTestSuite {
 
     @Test
     public void cartReadTest() throws CartNotFoundException {
+
         //given
         User user = new User("Test user", 9);
         Cart cart = new Cart();
@@ -47,11 +48,9 @@ public class CartEntityTestSuite {
 
         //then
         Assert.assertEquals("Test user", result.getUser().getUsername());
-        System.out.println(result.getUser().getUsername());
 
         //cleanup
         cartRepository.deleteById(id);
-        System.out.println(result.getUser().getUsername()+" changed?");
     }
 
     @Test
@@ -90,4 +89,5 @@ public class CartEntityTestSuite {
 
         //then
         Assert.assertNotEquals(countAfterDelete, countBeforeDelete);
-    }}
+    }
+}
