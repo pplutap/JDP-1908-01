@@ -31,6 +31,7 @@ public class Order {
 
     @Getter
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    @Setter
     private List<Product> products = new ArrayList<>();
 
 }

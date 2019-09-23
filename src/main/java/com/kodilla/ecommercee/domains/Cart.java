@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "CARTS")
+@Getter
 public class Cart {
 
     @Id
@@ -18,12 +19,10 @@ public class Cart {
     @Column(name = "CART_ID", unique = true)
     private Long cartId;
 
-    @Getter
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    @Getter
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private List<Product> products;
 }
